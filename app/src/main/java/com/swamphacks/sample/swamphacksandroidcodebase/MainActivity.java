@@ -1,5 +1,6 @@
 package com.swamphacks.sample.swamphacksandroidcodebase;
 
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,12 +14,14 @@ import android.widget.ImageView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +37,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this,DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE,message);
         startActivity(intent);
     }
 
@@ -61,21 +61,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void postData(){
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://quickdraw.pythonanywhere.com/");
-
-        try{
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("hnd","Testo"));
-            nameValuePairs.add(new BasicNameValuePair("pwd","Pass"));
-
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-           HttpResponse response = httpclient.execute(httppost);
-        }
-
-    }
-
 }
