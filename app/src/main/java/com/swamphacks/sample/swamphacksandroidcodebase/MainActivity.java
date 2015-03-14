@@ -5,63 +5,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.content.Intent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    ImageView ghostImageView;
-    ImageView pieImageView;
-
-    Animation ghostAnimation;
-    Animation.AnimationListener ghostAnimationListener;
+    public final static String EXTRA_MESSAGE = "quickdraw.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Set up the pie and ghost image views
-        ghostImageView = (ImageView) findViewById(R.id.ghost);
-        pieImageView = (ImageView) findViewById(R.id.pie);
-
-        ghostAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.spooky_animation);
-        ghostAnimationListener = getGhostAnimationListener();
-
-        pieImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ghostAnimation.setAnimationListener(ghostAnimationListener);
-                ghostImageView.setVisibility(View.VISIBLE);
-                ghostImageView.bringToFront();
-                ghostImageView.startAnimation(ghostAnimation);
-            }
-        });
     }
 
-    // Create an animation listener to set the visibility to false after the animation ends
-    private Animation.AnimationListener getGhostAnimationListener() {
-        return new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                // Don't worry about this
-                return;
-            }
-            public void onAnimationRepeat(Animation animation) {
-                // Don't worry about this
-                return;
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                ghostImageView.setVisibility(View.INVISIBLE);
-            }
-        };
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this,DisplayMessageActivity.class);
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE,message);
+        startActivity(intent);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,4 +50,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    
 }
