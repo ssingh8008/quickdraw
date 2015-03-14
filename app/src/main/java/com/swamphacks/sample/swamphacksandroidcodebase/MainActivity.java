@@ -11,6 +11,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends ActionBarActivity {
     public final static String EXTRA_MESSAGE = "quickdraw.MESSAGE";
@@ -51,5 +62,20 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    
+    public void postData(){
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://quickdraw.pythonanywhere.com/");
+
+        try{
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("hnd","Testo"));
+            nameValuePairs.add(new BasicNameValuePair("pwd","Pass"));
+
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+           HttpResponse response = httpclient.execute(httppost);
+        }
+
+    }
+
 }
