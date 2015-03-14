@@ -33,10 +33,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(this,DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE,message);
+        Intent intent = new Intent(this,GpsActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE,message);
         startActivity(intent);
     }
 
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void postData(){
+    /*public void postData(){
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("http://quickdraw.pythonanywhere.com/");
 
@@ -76,6 +76,6 @@ public class MainActivity extends ActionBarActivity {
            HttpResponse response = httpclient.execute(httppost);
         }
 
-    }
+    }*/
 
 }

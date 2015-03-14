@@ -25,6 +25,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.swamphacks.sample.swamphacksandroidcodebase.MainActivity" />
         </activity>
+        <activity
+            android:name=".GpsActivity"
+            android:label="@string/title_activity_gps"
+            android:parentActivityName=".MainActivity" >
+        </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
